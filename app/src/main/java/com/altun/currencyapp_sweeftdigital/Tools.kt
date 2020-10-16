@@ -37,7 +37,7 @@ object Tools {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             if (s!!.isNotEmpty()) {
-                val text = rate * s.toString().toFloat()
+                val text = s.toString().toFloat() / rate
                 dialog.changeEditText.setText(text.toString())
             } else
                 dialog.changeEditText.setText("")

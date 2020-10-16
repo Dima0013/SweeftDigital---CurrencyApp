@@ -27,7 +27,7 @@ import java.net.URL
 class MainActivity : AppCompatActivity() {
 
     private val items = mutableListOf<CurrencyModel>()
-    lateinit var adapter: CurrencyRecyclerViewAdapter
+    private lateinit var adapter: CurrencyRecyclerViewAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

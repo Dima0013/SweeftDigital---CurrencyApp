@@ -19,6 +19,7 @@ class HomeActivity : AppCompatActivity() {
 
     private val items = mutableListOf<CurrencyModel>()
     private lateinit var adapter: CurrencyRecyclerViewAdapter
+    lateinit var dateTime:String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +35,7 @@ class HomeActivity : AppCompatActivity() {
             getCurrencyInfo()
             withContext(Dispatchers.Main) {
                 adapter.notifyDataSetChanged()
+                currencyTimeTextView.text = dateTime
             }
         }
 
@@ -103,7 +105,7 @@ class HomeActivity : AppCompatActivity() {
                     }
                 }
                 if (parser.name == "pubDate")
-                    currencyTimeTextView.text = parser.nextText().removeSuffix("+0400")
+                    dateTime = parser.nextText().removeSuffix("+0400")
             }
             eventType = parser.next()
         }

@@ -4,12 +4,14 @@ import android.app.Dialog
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log.d
+import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import kotlinx.android.synthetic.main.dialog_layout.*
 
-object Tools {
+object DialogEditor {
     lateinit var dialog: Dialog
     var rate: Float = 0f
     fun showCurrencyCalculateDialog(context: Context, name: String, rate: Float) {
@@ -25,7 +27,20 @@ object Tools {
         dialog.window!!.attributes = params as WindowManager.LayoutParams
         dialog.changeTextView.text = name
 
-        dialog.gelEditText.addTextChangedListener(gelTextWatcher)
+        dialog.changeEditText.onFocusChangeListener =
+            View.OnFocusChangeListener { v, hasFocus ->
+                if (hasFocus){
+                    dialog.changeEditText.addTextChangedListener(changeTextWatcher)
+                    dialog.gelEditText.removeTextChangedListener(gelTextWatcher)
+                }
+            }
+        dialog.gelEditText.onFocusChangeListener =
+            View.OnFocusChangeListener { v, hasFocus ->
+                if (hasFocus){
+                    dialog.changeEditText.removeTextChangedListener(changeTextWatcher)
+                    dialog.gelEditText.addTextChangedListener(gelTextWatcher)
+                }
+            }
 
         dialog.okButton.setOnClickListener {
             dialog.dismiss()
@@ -44,5 +59,20 @@ object Tools {
         }
 
         override fun afterTextChanged(s: Editable?) {}
+    }
+
+    private val changeTextWatcher = object  : TextWatcher{
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            if (s!!.isNotEmpty()){
+                val text = rate * s.toString().toFloat()
+                dialog.gelEditText.setText(text.toString())
+            } else
+                dialog.gelEditText.setText("")
+        }
+
+        override fun afterTextChanged(s: Editable?) {}
+
     }
 }

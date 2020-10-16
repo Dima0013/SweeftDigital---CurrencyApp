@@ -33,7 +33,7 @@ class CurrencyRecyclerViewAdapter(private val items: MutableList<CurrencyModel>)
             Glide.with(itemView.context).load(model.img).into(itemView.currencyDiffImageView)
             itemView.setOnClickListener {
                 val arr = model.fullName!!.split(" ")[0].toInt()
-                Tools.showCurrencyCalculateDialog(itemView.context,model.name!!,model.rate!!.toFloat()/arr)
+                DialogEditor.showCurrencyCalculateDialog(itemView.context,model.name!!,model.rate!!.toFloat()/arr)
             }
         }
     }

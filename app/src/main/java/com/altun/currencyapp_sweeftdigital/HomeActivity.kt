@@ -1,22 +1,13 @@
 package com.altun.currencyapp_sweeftdigital
 
-import android.app.ProgressDialog
-import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log.d
-import android.view.Menu
-import android.widget.EditText
-import androidx.appcompat.widget.SearchView;
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import android.app.SearchManager;
-import android.widget.SearchView.OnQueryTextListener;
 import org.jsoup.Jsoup
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
@@ -24,7 +15,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.net.URL
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     private val items = mutableListOf<CurrencyModel>()
     private lateinit var adapter: CurrencyRecyclerViewAdapter
@@ -32,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
         init()
     }
 
